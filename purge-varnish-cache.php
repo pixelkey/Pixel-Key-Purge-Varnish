@@ -5,6 +5,7 @@
  * Description: Purge Vanish Cache on post save/update with curl method.
  * Version: 1.0.0
  * Author: Pixel Key
+ * Author URI: https://pixelkey.com
  * Requires PHP: 7.2.0
  */
 
@@ -45,13 +46,13 @@ add_action('pixelkey_purge_varnish', function () {
 	$ch = curl_init($url);
 
 	// set curl to BAN
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'BAN');
+	curl_setopt($ch, curlOPT_CUSTOMREQUEST, 'BAN');
 	
-	// // set the cURL to Purge the cache
-	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Purge-Method: varnish'));
-	// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PURGE');
-	// curl_setopt($ch, CURLOPT_POSTFIELDS, '');
+	// // set the curl to Purge the cache
+	// curl_setopt($ch, curlOPT_RETURNTRANSFER, true);
+	// curl_setopt($ch, curlOPT_HTTPHEADER, array('X-Purge-Method: varnish'));
+	// curl_setopt($ch, curlOPT_CUSTOMREQUEST, 'PURGE');
+	// curl_setopt($ch, curlOPT_POSTFIELDS, '');
 	
 	// Execute the request. IF DEBUGGING, comment out line below and uncomment "$exec_result = curl_exec($ch);"
 	curl_exec($ch);
@@ -61,16 +62,16 @@ add_action('pixelkey_purge_varnish', function () {
 	// // Get result of curl request. ONLY FOR DEBUGGING PURPOSES
 	// $exec_result = curl_exec($ch);
 
-	// // Check if the cURL request was successful
+	// // Check if the curl request was successful
 	// if (curl_errno($ch)) {
-	// 	// print to error file if cURL request was not successful
-	// 	cURL_status_log('Error: ' . curl_error($ch));
+	// 	// print to error file if curl request was not successful
+	// 	curl_status_log('Error: ' . curl_error($ch));
 	// } else {
-	// 	// print to error file if cURL request was successful
-	// 	cURL_status_log('Success: ' . $exec_result);
+	// 	// print to error file if curl request was successful
+	// 	curl_status_log('Success: ' . $exec_result);
 	// }
 
-	// cURL_status_log($exec_result);
+	// curl_status_log($exec_result);
 
 	// // END OF DEBUGGING SECTION
 
@@ -82,7 +83,7 @@ add_action('pixelkey_purge_varnish', function () {
 // // START OF DEBUGGING SECTION
 
 // // Print to curl_status_log file in current plugins folder - mu-plugins folder.
-// function cURL_status_log($message)
+// function curl_status_log($message)
 // {
 // 	// Delete old log file
 // 	$file_name = 'curl_status_log.txt';
