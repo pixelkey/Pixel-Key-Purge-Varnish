@@ -5,7 +5,6 @@
  * Description: Purge Vanish Cache on post save/update with curl method.
  * Version: 1.0.0
  * Author: Pixel Key
- * Author URI: https://pixelkey.com
  * Requires PHP: 7.2.0
  */
 
@@ -46,13 +45,13 @@ add_action('pixelkey_purge_varnish', function () {
 	$ch = curl_init($url);
 
 	// set curl to BAN
-	curl_setopt($ch, curlOPT_CUSTOMREQUEST, 'BAN');
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'BAN');
 	
 	// // set the curl to Purge the cache
-	// curl_setopt($ch, curlOPT_RETURNTRANSFER, true);
-	// curl_setopt($ch, curlOPT_HTTPHEADER, array('X-Purge-Method: varnish'));
-	// curl_setopt($ch, curlOPT_CUSTOMREQUEST, 'PURGE');
-	// curl_setopt($ch, curlOPT_POSTFIELDS, '');
+	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Purge-Method: varnish'));
+	// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PURGE');
+	// curl_setopt($ch, CURLOPT_POSTFIELDS, '');
 	
 	// Execute the request. IF DEBUGGING, comment out line below and uncomment "$exec_result = curl_exec($ch);"
 	curl_exec($ch);
