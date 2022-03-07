@@ -79,20 +79,20 @@ add_action('pixelkey_purge_varnish', function () {
 });
 
 
-// // START OF DEBUGGING SECTION
+// START OF DEBUGGING SECTION
 
-// // Print to custom log file in uploads folder
-// function cURL_status_log($message)
-// {
-// 	// Delete old log file
-// 	$file_name = 'curl_status_log.txt';
-// 	$file_path = plugin_dir_path(__FILE__) . $file_name;
-// 	if (file_exists($file_path)) {
-// 		unlink($file_path);
-// 	}
-// 	$log = fopen($file_path, 'a');
-// 	fwrite($log, $message . PHP_EOL);
-// 	fclose($log);
-// }
+// Print to curl_status_log file in current plugins folder - mu-plugins folder.
+function cURL_status_log($message)
+{
+	// Delete old log file
+	$file_name = 'curl_status_log.txt';
+	$file_path = plugin_dir_path(__FILE__) . $file_name;
+	if (file_exists($file_path)) {
+		unlink($file_path);
+	}
+	$log = fopen($file_path, 'a');
+	fwrite($log, $message . PHP_EOL);
+	fclose($log);
+}
 
-// // END OF DEBUGGING SECTION
+// END OF DEBUGGING SECTION
