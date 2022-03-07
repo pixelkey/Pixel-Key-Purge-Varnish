@@ -1,5 +1,5 @@
 # Pixel Key Purge Varnish
-This is a WordPress plugin to purge or ban the varnish Cache on post save/update with cURL method.
+This is a WordPress plugin to purge or ban the varnish cache on post save/update with cURL method.
 
  You can also add the action for post status transition to purge varnish cache. However, this may be overkill in some most cases. Hence it has been disabled unless you need it.
 
