@@ -5,6 +5,7 @@
  * Description: Purge Vanish Cache on post save/update with curl method.
  * Version: 1.0.0
  * Author: Pixel Key
+ * Author URI: https://pixelkey.com
  * Requires PHP: 7.2.0
  */
 
