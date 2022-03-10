@@ -41,38 +41,23 @@ PostHooks::init();
 
 add_action('pixelkey_purge_varnish', function () {
 
-	// Set url to your Varnish server
-	$url = 'localhost';
-	$ch = curl_init($url);
+	// Set url to trigger cache purge
+	$url = 'https://localhost';
+	$args = [];
 
-	// set curl to BAN
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'BAN');
-	
-	// // set the curl to Purge the cache
-	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	// curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Purge-Method: varnish'));
-	// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PURGE');
-	// curl_setopt($ch, CURLOPT_POSTFIELDS, '');
-	
-	// Execute the request.
-	$exec_result = curl_exec($ch);
+	// wp_remote_get() is used to BAN varnish cache
+	$response = wp_remote_get($url, $args);
 
 	// // START OF DEBUGGING SECTION
-	// // Check if the curl request was successful
-	// if (curl_errno($ch)) {
-	// 	// print to error file if curl request was not successful
-	// 	curl_status_log('Error: ' . curl_error($ch));
+	// // If the response is an error, print it out.
+	// if (is_wp_error($response)) {
+	// 	curl_status_log($response->get_error_message());
 	// } else {
-	// 	// print to error file if curl request was successful
-	// 	curl_status_log('Success: ' . $exec_result);
+	// 	// If the response is successful, print out the response code.
+	// 	curl_status_log($response);
 	// }
-
-	// curl_status_log($exec_result);
-
 	// // END OF DEBUGGING SECTION
 
-
-	curl_close($ch);
 });
 
 
@@ -88,7 +73,8 @@ add_action('pixelkey_purge_varnish', function () {
 // 		unlink($file_path);
 // 	}
 // 	$log = fopen($file_path, 'a');
-// 	fwrite($log, $message . PHP_EOL);
+// 	// json_encode() is used to convert the array to a JSON string.
+// 	fwrite($log, json_encode($message) . PHP_EOL);
 // 	fclose($log);
 // }
 
