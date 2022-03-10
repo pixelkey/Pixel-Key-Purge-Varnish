@@ -54,14 +54,10 @@ add_action('pixelkey_purge_varnish', function () {
 	// curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PURGE');
 	// curl_setopt($ch, CURLOPT_POSTFIELDS, '');
 	
-	// Execute the request. IF DEBUGGING, comment out line below and uncomment "$exec_result = curl_exec($ch);"
-	curl_exec($ch);
-
+	// Execute the request.
+	$exec_result = curl_exec($ch);
 
 	// // START OF DEBUGGING SECTION
-	// // Get result of curl request. ONLY FOR DEBUGGING PURPOSES
-	// $exec_result = curl_exec($ch);
-
 	// // Check if the curl request was successful
 	// if (curl_errno($ch)) {
 	// 	// print to error file if curl request was not successful
