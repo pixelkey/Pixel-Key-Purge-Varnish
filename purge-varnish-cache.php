@@ -21,7 +21,7 @@ class PostHooks
 		add_action('save_post_page', [static::class, 'onPostSaveAndUpdate']);
 		add_action('save_post_weekly_issue', [static::class, 'onPostSaveAndUpdate']);
 
-		// // Add action to post status transition to purge varnish cache. This may be overkill in some cases. Hence it has been disabled unless you need it.
+		// // Add action to post status transition to purge varnish cache. This may be overkill in some cases and could potentially cause conflicts with other plugins. Hence it has been disabled unless you need it.
 		// add_action('transition_post_status', [static::class, 'onPostStatusTransition'], 10, 3);
 	}
 
@@ -53,7 +53,7 @@ add_action('pixelkey_purge_varnish', function () {
 		'method'    => $purge_method
 	);
 
-	$debug_mode = true;
+	$debug_mode = false;
 	$debug_log_file = 'curl_status_log.txt';
 
 	// wp_remote_request is used to PURGE or BAN varnish cache
