@@ -19,7 +19,6 @@ class PostHooks
 		// Add action to save post to purge varnish cache for specific post types.
 		add_action('save_post_post', [static::class, 'onPostSaveAndUpdate']);
 		add_action('save_post_page', [static::class, 'onPostSaveAndUpdate']);
-		add_action('save_post_weekly_issue', [static::class, 'onPostSaveAndUpdate']);
 
 		// // Add action to post status transition to purge varnish cache. This may be overkill in some cases and could potentially cause conflicts with other plugins. Hence it has been disabled unless you need it.
 		// add_action('transition_post_status', [static::class, 'onPostStatusTransition'], 10, 3);
