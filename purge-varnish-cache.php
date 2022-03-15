@@ -42,40 +42,34 @@ PostHooks::init();
 add_action('pixelkey_purge_varnish', function () {
 
 	// Set url to trigger cache purge
-	$url = 'https://localhost';
-	$args = [];
+	$url = 'http://localhost';
 
-	// wp_remote_get() is used to BAN varnish cache
-	$response = wp_remote_get($url, $args);
+	// Set purge method.
+	$purge_method = 'BAN';
 
-	// // START OF DEBUGGING SECTION
-	// // If the response is an error, print it out.
-	// if (is_wp_error($response)) {
-	// 	curl_status_log($response->get_error_message());
-	// } else {
-	// 	// If the response is successful, print out the response code.
-	// 	curl_status_log($response);
-	// }
-	// // END OF DEBUGGING SECTION
+	$args = array(
+		'method'    => $purge_method
+	);
+
+	$debug_mode = false;
+	$debug_log_file = 'curl_status_log.txt';
+
+	// wp_remote_request is used to PURGE or BAN varnish cache
+	$response = wp_remote_request($url, $args);
+
+	
+
+	// START OF DEBUGGING SECTION
+	if ($debug_mode === true) {
+		$file_path = plugin_dir_path(__FILE__) . $debug_log_file;
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
+		$log = fopen($file_path, 'a');
+		// json_encode() is used to convert the array to a JSON string.
+		fwrite($log, json_encode($response) . PHP_EOL);
+		fclose($log);
+	}
+	// END OF DEBUGGING SECTION
 
 });
-
-
-// // START OF DEBUGGING SECTION
-
-// // Print to curl_status_log file in current plugins folder - mu-plugins folder.
-// function curl_status_log($message)
-// {
-// 	// Delete old log file
-// 	$file_name = 'curl_status_log.txt';
-// 	$file_path = plugin_dir_path(__FILE__) . $file_name;
-// 	if (file_exists($file_path)) {
-// 		unlink($file_path);
-// 	}
-// 	$log = fopen($file_path, 'a');
-// 	// json_encode() is used to convert the array to a JSON string.
-// 	fwrite($log, json_encode($message) . PHP_EOL);
-// 	fclose($log);
-// }
-
-// // END OF DEBUGGING SECTION
